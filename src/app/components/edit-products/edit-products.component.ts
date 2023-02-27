@@ -24,6 +24,8 @@ export class EditProductsComponent implements OnInit {
 
   product: Product = new Product();
 
+  theproductId;
+
 
 
   constructor(private _productCategoryService: ProductCategoryService,
@@ -35,7 +37,7 @@ export class EditProductsComponent implements OnInit {
   ngOnInit(): void {
 
     this.displayProductCategories();
-    //  this.displayProductById();
+    this.displayProductId();
 
     this.allProducts = this._formBuilder.group({
 
@@ -112,11 +114,12 @@ export class EditProductsComponent implements OnInit {
     return this.allProducts.get('productInputs.category');
   }
 
+   displayProductId(){
+    this.theproductId = +this.route.snapshot.paramMap.get('id')!
+   }
 
 
   onSubmit() {
-
-    const theproductId :number = +this.route.snapshot.paramMap.get('id')!
 
     if(this.allProducts.invalid){
       this.allProducts.markAllAsTouched();
@@ -137,23 +140,21 @@ export class EditProductsComponent implements OnInit {
 
      console.log(productTry);
 
-    this._productService.editProduct(theproductId,productTry).subscribe(
+    this._productService.editProduct(this.theproductId,productTry).subscribe(
       (response:Product)=>{
          this._router.navigateByUrl("/productList") 
-      },
-      (error:HttpErrorResponse)=>{
-        console.log(error)
       }
     );
   }
 
 
-   
+  
   displayProductCategories(){
 
     this._productCategoryService.getCategories().subscribe(
       data=>{
         this.productCategories=data
+        console.log(this.theproductId)
       } 
     )
   }
