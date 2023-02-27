@@ -20,12 +20,9 @@ export class EditProductsComponent implements OnInit {
 
   productCategories?: ProductCategory[] = [];
 
-  products?: Product[] = [];
+  theproductId:number;
 
-  product: Product = new Product();
-
-  theproductId;
-
+  product:Product;
 
 
   constructor(private _productCategoryService: ProductCategoryService,
@@ -37,7 +34,7 @@ export class EditProductsComponent implements OnInit {
   ngOnInit(): void {
 
     this.displayProductCategories();
-    this.displayProductId();
+    this.getProductById();
 
     this.allProducts = this._formBuilder.group({
 
@@ -71,8 +68,6 @@ export class EditProductsComponent implements OnInit {
         EcommerceValidator.noOnlyWhiteSpace])
 
       }),
-
-
 
       // file: this._formBuilder.group({
 
@@ -114,8 +109,18 @@ export class EditProductsComponent implements OnInit {
     return this.allProducts.get('productInputs.category');
   }
 
-   displayProductId(){
+
+   getProductById(){
+
     this.theproductId = +this.route.snapshot.paramMap.get('id')!
+
+    this._productService.getProductById(this.theproductId).subscribe(
+      data=>{
+       this.product =data;
+       console.log(this.product);
+      } 
+    )
+    
    }
 
 
@@ -130,6 +135,7 @@ export class EditProductsComponent implements OnInit {
     
     let allProducts = this.allProducts.controls['productInputs'].value
 
+  
     productTry.productName = allProducts.product
     productTry.productReference = allProducts.reference
     productTry.unitsInStock = allProducts.quantity;
@@ -138,7 +144,7 @@ export class EditProductsComponent implements OnInit {
     productTry.productCategory = allProducts.category;
     productTry.description = allProducts.decription;
 
-     console.log(productTry);
+    
 
     this._productService.editProduct(this.theproductId,productTry).subscribe(
       (response:Product)=>{
