@@ -1,0 +1,99 @@
+
+<div class="flex items-center justify-between ">
+
+  
+    <div class="mr-10" *ngIf="auth.isAuthenticated$ | async else loggedOut">
+      <div ngbDropdown class="relative inline-block text-left">
+
+        <div class="flex">
+          <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
+            Email</label>
+  
+          <button ngbDropdownToggle id="dropdown-button" data-dropdown-toggle="dropdown"
+            class=" text-gray-800 text-base font-semibold flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4  text-center    dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+            type="button">MI CUENTA<svg aria-hidden="true" class="w-4 h-4 ml-1" fill="currentColor"
+              viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            </svg></button>
+  
+          <div  id="dropdown"class=" dropdown-menu   z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+  
+            <ul ngbDropdownMenu class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+  
+              <div >
+                <li>
+                  <button type="button"
+                   routerLink="productList" 
+                   class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Administrador</button>
+                </li>
+                <li>
+                  <button type="button"
+                  routerLink="/profile"
+                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mi perfil</button>
+                </li>
+                <li>
+                  <button 
+                    routerLink="/contact"
+                    type="button"
+                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Enviar mensaje</button>
+                </li>
+                <li>
+                  <button type="button"
+                   routerLink="/orderHistory"
+                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mis ordenes</button>
+                </li>
+                <li>
+        
+            
+
+                  <button (click)="auth.logout()" type="button"
+                  class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cerrar sesion</button>
+
+
+                </li>
+              </div>
+            
+            </ul>
+          </div>
+        </div>
+  
+      </div>
+     </div>
+
+
+     <ng-template #loggedOut>
+      <button  class="text-gray-800 text-base font-semibold hover:text-blue-600 m-2.5"           
+      (click)="auth.loginWithRedirect()">INGRESAR</button>
+     </ng-template>
+
+
+     <div class="mt-2"  >
+      <div class="hidden sm:flex sm:itemsfa-pull-right " *ngIf="auth.isAuthenticated$ | async else nothing" >
+        <div class="m-3">
+          <button routerLink="/cart" role="button"
+            class="relative flex  text-gray-900 text-sm font-semibold  py-2 rounded-lg hover:text-blue-600 hover:border-blue-600  ">
+            <div class="text-gray-800 text-base font-semibold hover:text-blue-600 ">CARRITO</div>
+    
+            <div>
+              <svg class="flex-1 w-8 h-8 fill-current" viewbox="0 0 24 24">
+                <path
+                  d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" />
+              </svg>
+              <span
+                class="absolute right-0 top-0 rounded-full bg-red-600 w-3 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">{{totalQuantity}}
+              </span>
+            </div> 
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #nothing>
+      <div type="hidden"></div>
+    </ng-template>
+
+</div>
+
+
+
+
+

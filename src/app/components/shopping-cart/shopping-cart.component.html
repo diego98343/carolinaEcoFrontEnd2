@@ -1,0 +1,197 @@
+
+
+<div class="logo-section"></div>
+<div class="min-w-screen min-h-screen bg-gray-50 py-5">
+
+  <div class="px-5">
+    
+    <div class="w-full bg-white border-t border-b border-gray-200 px-5 py-10 text-gray-800">
+        <div class="w-full ">
+            <div class="-mx-3 md:flex items-start ">
+                <div class="   px-3 md:w-7/12 lg:pr-20 border rounded" style="margin-top: 40px;">
+                    <div class=" overflow-scroll p-3 bg-light w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6 m-5  " 
+                    style="max-width: 600px; max-height: 400px;"
+                    
+                    >
+                        <div class="w-full flex items-center col-xs-12 col-centered o" style="margin: 10px;"  *ngFor="let tempCartItem of cartItems">
+                            <div class="overflow-hidden rounded-lg w-16 h-25 bg-gray-50 border border-gray-200">
+                                <img src="{{tempCartItem.imageUrl}}" alt="">
+                            </div>
+                            <div class="flex-grow pl-3  columns-xs">
+                                <h6 class="font-semibold uppercase text-gray-600 columns-xs">{{tempCartItem.name}}</h6>
+                                <p class="text-gray-400 columns-xs">REF {{tempCartItem.reference}}</p>
+                                <!-- <p class="text-gray-400 columns-xs">Id {{tempCartItem.id}}</p> -->
+                                <p class="text-gray-400 columns-xs">Size {{tempCartItem.size}}</p>
+                                <p class="text-gray-400 columns-xs ">${{tempCartItem.unitPrice}}</p>
+                            </div>
+
+
+                            <div class="d-flex flex-row align-items-center m-6" >
+                                <div >
+                                  <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                   <i class="fas fa-plus" ></i>
+                                  </button>
+                                </div>
+                               
+                                <div style="margin: 5px;">
+                                  <!-- <h5 class="fw-normal mb-0">{{tempCartItem.quantity}}</h5> -->
+                                  <input type="text" class="fw-normal col-xs-2 w-10 text-black-400 fw-bold text-center" value="{{tempCartItem.quantity}}">
+                                </div>
+                                
+                                <div >
+                                  <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-minus"></i>
+                                   </button>
+                                </div>
+                            </div>
+                            
+                         
+
+                            <div style="width: 80px; margin: 13px;">
+                              <span class="font-semibold text-gray-600 text-xl">${{ tempCartItem.quantity * (tempCartItem.unitPrice)!}}</span>
+                            </div>
+                           
+                            <span style="color: #cecece; margin: 10px;" (click)="deleteProducto(tempCartItem)"><i class="fas fa-trash-alt" ></i></span>
+                        </div>
+
+                        
+
+                    
+                        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert" *ngIf="cartItems.length===0">
+                          <p class="font-bold">Mensaje</p>
+                          <p class="text-sm">No se ha añadido nada al carrito</p>
+                        </div>
+
+
+
+                    </div>
+               
+                   
+
+                    <div class="mb-6 pb-6 border-b border-gray-200 text-gray-800" *ngIf="cartItems.length!=0">
+
+                        <div class="w-full flex mb-3 items-center">
+                            <div class="flex-grow">
+                                <span class="text-gray-600">Subtotal</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold">${{totalPrice}}</span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="w-full flex items-center">
+                            <div class="flex-grow">
+                                <span class="text-gray-600">Taxes (18%)</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold"> ${{totalTaxes}}</span>
+                            </div>
+                        </div>
+
+
+                        <div style="margin-top: 20px;" class="w-full flex items-center" *ngIf="discountPercentage > 0"  >
+                            <div class="flex-grow">
+                                <span class="text-gray-600">Descuento ({{discountPercentage}}%)</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold">- ${{(totalPriceWithTaxes * discountPercentage)/100 }}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="mb-6 pb-6 border-b border-gray-200 md:border-none text-gray-800 text-xl" *ngIf="cartItems.length!=0">
+                        <div class="w-full flex items-center">
+                            <div class="flex-grow">
+                                <span class="text-gray-600">Total</span>
+                            </div>
+                            <div class="pl-3">
+                                <span class="font-semibold text-gray-400 text-sm">AUD</span> <span class="font-semibold">${{totalPriceWithTaxes}}</span>
+                            </div>
+
+                           
+                        </div>
+                        <div>
+                            <button routerLink="/checkOut" type="button" class="btn btn-primary" style="margin-top: 20px;">Pagar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="mr-10 rounded-sm">
+                    <img   class="img-responsive" *ngIf="cartItems.length !=0  "  src="/assets/images/Carolina Colonia - Portafolio Digital.jpg"  style="margin: 40px;">
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div class="p-5">
+        <div class="text-center text-gray-400 text-sm">
+            <a href="https://www.buymeacoffee.com/scottwindon" target="_blank" class="focus:outline-none underline text-gray-400"><i class="mdi mdi-beer-outline"></i>Buy me a beer</a> and help support open-resource
+        </div>
+    </div>
+</div>
+
+<!-- BUY ME A BEER AND HELP SUPPORT OPEN-SOURCE RESOURCES -->
+<div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+    <div>
+        <a title="Buy me a beer" href="https://www.buymeacoffee.com/scottwindon" target="_blank" class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+            <img class="object-cover object-center w-full h-full rounded-full" src="https://i.pinimg.com/originals/60/fd/e8/60fde811b6be57094e0abc69d9c2622a.jpg"/>
+        </a>
+    </div>
+</div>
+
+
+ 
+     
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+  
+  
+  

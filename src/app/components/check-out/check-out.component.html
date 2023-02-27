@@ -1,0 +1,372 @@
+<div class="leading-loose md:flex md:justify-center mb-6">
+
+    <form [formGroup]="checkOutFormGroup"
+           (ngSubmit)="onSubmit()"
+          class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+
+        <p class="text-gray-800 font-medium">Cliente</p>
+
+        <div formGroupName="custumer" style="margin-bottom: 10px;">
+            <div class="">
+                <label class="block text-sm text-gray-00" for="cus_name">Name</label>
+                <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       id="cus_name" 
+                       formControlName="name" 
+                       type="text"
+                       required="" 
+                       placeholder="Your Name"
+                       aria-label="Name">
+            </div>
+
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="name.errors?.['required'] || name.errors?.['noOnlyWhiteSpace']">
+                    nombre no puede estar vacio
+                </div>
+
+                <div *ngIf="name.errors?.['minlength']">
+                    nombre debe terner mas de dos caracteres
+                </div>
+            </div>
+           
+            <div class="mt-2">
+                <label class="block text-sm text-gray-600" for="cus_email">Email</label>
+                <input 
+                        class="w-full px-2  py-2 text-gray-700 bg-gray-200 rounded" 
+                        id="cus_email" 
+                        formControlName="email"
+                        type="text" 
+                        required="" 
+                        placeholder="Your Email" 
+                        aria-label="Email">
+            </div> 
+
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="email.errors?.['required']">
+                    email no puede estar vacio
+                </div>
+                <div *ngIf="email.errors?.['pattern']">
+                    email debe der valido
+                </div>
+            </div>
+
+        </div>
+
+        <div formGroupName="receiptAddress">
+            <p class="text-gray-800 font-medium mt-4">Direccion de recibo</p>    
+            <div class="mt-2">
+                <label class=" block text-sm text-gray-600" for="cus_email">Address</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="address"
+                       id="cus_email" 
+                       name="address" 
+                       type="text"
+                       required="" 
+                       placeholder="Street" 
+                       aria-label="Address">
+            </div>
+
+            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="address.errors?.['required']">
+                    direcion no puede estar vacio
+                </div>
+                <div *ngIf="address.errors?.['minlength']">
+                    direcion tiene que tener mas de 6 caracteres
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <label class="text-sm block text-gray-600" for="cus_email">City</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="city"
+                       id="cus_email" name="City" 
+                       type="text"
+                       required="" 
+                       placeholder="City" 
+                       aria-label="City">
+            </div>
+
+            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="city.errors?.['required']">
+                    ciudad no puede estar vacio
+                </div>
+                <div *ngIf="city.errors?.['minlength']">
+                    ciudad tiene que tener almenos 3 caracteres 
+                </div>
+            </div>
+
+            <div class="inline-block mt-2 w-1/2 pr-1">
+                <label class="block text-sm text-gray-600" for="cus_email">Country</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="Country" type="text"
+                       formControlName="country"
+                       required="" 
+                       placeholder="Country" 
+                       aria-label="Email">
+            </div>
+
+            <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="country.errors?.['required']">
+                    Pais no puede estar vacio
+                </div>
+                <div *ngIf="country.errors?.['minlength']">
+                    Pais tiene que tener almenos 3 caracteres 
+                </div>
+            </div>
+
+            <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+                <label class="block text-sm text-gray-600" for="cus_email">Zip</label>
+                <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="zipCode"
+                       id="zip-code" 
+                       name="zip-code" 
+                       type="text"
+                       required="" 
+                       placeholder="Zip" 
+                       aria-label="Email">
+            </div>
+
+            <div *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="zipCode.errors?.['required']">
+                    codigo postal no puede estar vacio
+                </div>
+                <div *ngIf="zipCode.errors?.['minlength']">
+                    codigo postal tiene que tener almenos 4 caracteres 
+                </div>
+            </div>
+
+        </div>
+          
+       
+
+        <div formGroupName="shippingInfo">
+
+            <p class="text-gray-800 font-medium mt-4">Direccion de envio</p>     
+            <div class="form-check">
+                <input  
+                        type="checkbox"
+                        (change)="copyShippingAddressToBillingAddress($event)"
+                         >
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                  usar misma direction del recibo
+                </label>
+            </div>
+
+            <div class="mt-2">
+                <label class=" block text-sm text-gray-600" for="cus_email">Address</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="address"
+                       id="cus_email" 
+                       name="address" 
+                       type="text"
+                       required="" 
+                       placeholder="Street" 
+                       aria-label="Address">
+            </div>
+
+            <div *ngIf="shippingAddress.invalid && (shippingAddress.dirty || shippingAddress.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="shippingAddress.errors?.['required']">
+                    direcion no puede estar vacio
+                </div>
+                <div *ngIf="shippingAddress.errors?.['minlength']">
+                    direcion tiene que tener mas de 6 caracteres
+                </div>
+            </div>
+
+
+
+
+            <div class="mt-2">
+                <label class="text-sm block text-gray-600" for="cus_email">City</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="city"
+                       id="cus_email" name="City" 
+                       type="text"
+                       required="" 
+                       placeholder="City" 
+                       aria-label="City">
+            </div>
+
+            <div *ngIf="shippingCity.invalid && (shippingCity.dirty || shippingCity.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="shippingCity.errors?.['required']">
+                    Ciudad no puede estar vacio
+                </div>
+                <div *ngIf="shippingCity.errors?.['minlength']">
+                    Ciudad tiene que tener almenos 3 caracteres 
+                </div>
+            </div>
+
+
+
+
+            <div class="inline-block mt-2 w-1/2 pr-1">
+                <label class="block text-sm text-gray-600" for="cus_email">Country</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="Country" type="text"
+                       formControlName="country"
+                       required="" 
+                       placeholder="Country" 
+                       aria-label="Email">
+            </div>
+
+            <div *ngIf="shippingCountry.invalid && (shippingCountry.dirty || shippingCountry.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="shippingCountry.errors?.['required']">
+                     Pais no puede estar vacio
+                </div>
+                <div *ngIf="shippingCountry.errors?.['minlength']">
+                    Pais tiene que tener almenos 3 caracteres 
+                </div>
+            </div>
+
+
+
+            <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+                <label class="block text-sm text-gray-600" for="cus_email">Zip</label>
+                <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="zipCode"
+                       id="zip-code" 
+                       name="zip-code" 
+                       type="text"
+                       required="" 
+                       placeholder="Zip" 
+                       aria-label="Email">
+            </div>
+
+            <div *ngIf="shippingZipCode.invalid && (shippingZipCode.dirty || shippingZipCode.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="shippingZipCode.errors?.['required']">
+                    codigo postal no puede estar vacio
+                </div>
+                <div *ngIf="shippingZipCode.errors?.['minlength']">
+                    codigo postal tiene que tener almenos 4 caracteres 
+                </div>
+            </div>
+        </div>
+
+
+
+        <div formGroupName="creditCardInfo">
+            <p class="mt-4 text-gray-800 font-medium">Payment information</p>
+            <div class="">
+                <label class="block text-sm text-gray-600" for="cus_name">Card</label>
+                <input 
+                       class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" 
+                       formControlName="creditCardNumber"
+                       id="cus_name" name="text" type="text"
+                       required="" 
+                       placeholder="Card Number" 
+                       aria-label="Name">
+            </div>
+
+            <div *ngIf="creditCartNumber.invalid && (creditCartNumber.dirty || creditCartNumber.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="creditCartNumber.errors?.['required']">
+                    Numero de tarjeta no puede estar vacio
+                </div>
+                <div *ngIf="creditCartNumber.errors?.['minlength']">
+                    Numero de tarjeta  tiene que tener almenos 16 caracteres 
+                </div>
+            </div>
+
+
+            <div class="inline-block mt-2 w-1/2 pr-1">
+                <label class="hidden block text-sm text-gray-600" for="cus_email">Expiration data</label>
+                <!-- <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="fecha de caducidad" aria-label="Email"> -->
+                <select name='expireMM' 
+                        id='expireMM' 
+                        formControlName="expirationMonth">
+
+                    <option value=''>Month</option>
+                    <option value='01'>January</option>
+                    <option value='02'>February</option>
+                    <option value='03'>March</option>
+                    <option value='04'>April</option>
+                    <option value='05'>May</option>
+                    <option value='06'>June</option>
+                    <option value='07'>July</option>
+                    <option value='08'>August</option>
+                    <option value='09'>September</option>
+                    <option value='10'>October</option>
+                    <option value='11'>November</option>
+                    <option value='12'>December</option>
+                </select>
+                <select name='expireYY' 
+                        id='expireYY'
+                        formControlName="expirationYear">
+
+                    <option value=''>Year</option>
+                    <option value='20'>2020</option>
+                    <option value='21'>2021</option>
+                    <option value='22'>2022</option>
+                    <option value='23'>2023</option>
+                    <option value='24'>2024</option>
+                </select>
+                <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4" />
+            </div>
+
+            <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+                <label class="hidden block text-sm text-gray-600" for="cus_email">Security code</label>
+                <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+                       formControlName="securityCode"
+                       id="cus_email" 
+                       name="text"
+                       type="text" 
+                       required="" 
+                       placeholder="codigo de seguridad" 
+                       aria-label="Email">
+            </div>
+
+            <div *ngIf="creditSecurityCode.invalid && (creditSecurityCode.dirty || creditSecurityCode.touched)" class="alert alert-danger mt-1">
+                <div *ngIf="creditSecurityCode.errors?.['required']">
+                    Codigo de seguridad de tarjeta no puede estar vacio
+                </div>
+                <div *ngIf="creditSecurityCode.errors?.['minlength']">
+                    Codigo de seguridad tiene que tener almenos 3 caracteres 
+                </div>
+            </div>
+
+<!-- 
+            <form action="" method="POST">
+                <div class="flex items-center w-full h-13 pl-3 bg-gray-100 border rounded-full mt-5">
+                  <input type="coupon" name="code" id="coupon" placeholder="Apply coupon" value="90off"
+                          class="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none"/>
+                    <button type="submit" class="text-sm flex items-center px-3 py-1 text-white bg-gray-800 rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none">
+                      <svg aria-hidden="true" data-prefix="fas" data-icon="gift" class="w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h160V320H32v128zm256 32h160c17.7 0 32-14.3 32-32V320H288v160zm192-320h-42.1c6.2-12.1 10.1-25.5 10.1-40 0-48.5-39.5-88-88-88-41.6 0-68.5 21.3-103 68.3-34.5-47-61.4-68.3-103-68.3-48.5 0-88 39.5-88 88 0 14.5 3.8 27.9 10.1 40H32c-17.7 0-32 14.3-32 32v80c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16v-80c0-17.7-14.3-32-32-32zm-326.1 0c-22.1 0-40-17.9-40-40s17.9-40 40-40c19.9 0 34.6 3.3 86.1 80h-86.1zm206.1 0h-86.1c51.4-76.5 65.7-80 86.1-80 22.1 0 40 17.9 40 40s-17.9 40-40 40z"/></svg>
+                      <span class="font-medium">Applicar cupon</span>
+                    </button>
+                </div>
+            </form> -->
+
+            <div class="mb-6 pb-6 border-b border-gray-200 md:border-none text-gray-800 text-xl mt-10">
+
+                <div class="w-full flex items-center">
+                    <div class="flex-grow">
+                        <span class="text-gray-600">Total</span>
+                    </div>
+                    <div class="pl-1">
+                        <span class="font-semibold text-gray-400 text-sm">AUD</span> <span class="font-semibold">${{totalPriceWithTaxes}}</span>
+                    </div> 
+                </div>
+               
+            </div>
+
+            
+            <div class="mt-4">
+                <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+                        type="submit" >Pagar</button>
+            </div>
+        </div>
+
+
+
+
+
+
+            
+
+        
+     
+       
+    </form>
+</div>

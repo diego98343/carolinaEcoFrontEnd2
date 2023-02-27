@@ -1,0 +1,192 @@
+<div class="mt-5">
+  <div class="container col-md-4">
+
+    <form [formGroup]="allProducts" (ngSubmit)="onSubmit()">
+
+      <div formGroupName="productInputs" class="mb-3">
+        <div >
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Producto</label>
+              <input formControlName="product" 
+                     type="email" class="form-control" 
+                     id="exampleInputEmail1"
+                     placeholder="nombre del producto">
+            </div>
+          </div>
+
+          <div *ngIf="productName.invalid && (productName.dirty || productName.touched)" class="alert alert-danger mt-1">
+            <div *ngIf="productName.errors?.['required'] || productName.errors?.['noOnlyWhiteSpace']">
+                producto no puede estar vacio
+            </div>
+
+            <div *ngIf="productName.errors?.['minlength']">
+                producto debe terner mas de dos caracteres
+            </div>
+          </div>
+
+
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Referencia</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="exampleInputPassword1" 
+                     placeholder="numero de referencia"
+                     formControlName="reference"
+                      >
+                      
+            </div>
+          </div>
+
+
+          <div *ngIf="productReference.invalid && (productReference.dirty || productReference.touched)" class="alert alert-danger mt-1">
+            <div *ngIf="productReference.errors?.['required'] || productReference.errors?.['noOnlyWhiteSpace']">
+                referencia no puede estar vacio
+            </div>
+
+            <div *ngIf="productReference.errors?.['minlength']">
+                 referencia debe terner mas de dos caracteres
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Cantidad</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="exampleInputPassword1"
+                     placeholder="cantidad total en inventario" 
+                     formControlName="quantity">
+
+            </div>
+          </div>
+
+
+          <div *ngIf="productQuantity.invalid && (productQuantity.dirty || productQuantity.touched)" class="alert alert-danger mt-1">
+            <div *ngIf="productQuantity.errors?.['required'] || productQuantity.errors?.['noOnlyWhiteSpace']">
+                cantidad no puede estar vacio
+            </div>
+
+            <div *ngIf="productQuantity.errors?.['minlength']">
+                cantidad debe terner mas de dos caracteres
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Precio</label>
+              <input type="text"
+                     class="form-control" 
+                     id="exampleInputPassword1"
+                     placeholder="precio del producto" 
+                     formControlName="price">
+
+            </div>
+          </div>
+
+          <div *ngIf="productPrice.invalid && (productPrice.dirty || productPrice.touched)" class="alert alert-danger mt-1">
+            <div *ngIf="productPrice.errors?.['required'] || productPrice.errors?.['noOnlyWhiteSpace']">
+                precio no puede estar vacio
+            </div>
+
+            <div *ngIf="productPrice.errors?.['minlength']">
+                precio debe terner mas de dos caracteres
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Link de imagen</label>
+              <input type="url" class="form-control" id="exampleInputPassword1" placeholder="Link"
+                formControlName="imageUrl">
+
+            </div>
+          </div>
+
+
+          <div *ngIf="productImageUrl.invalid && (productImageUrl.dirty || productImageUrl.touched)" class="alert alert-danger mt-1">
+            <div *ngIf="productImageUrl.errors?.['required'] || productImageUrl.errors?.['noOnlyWhiteSpace']">
+                image url no puede estar vacio
+            </div>
+
+            <div *ngIf="productImageUrl.errors?.['minlength']">
+                imagen url debe terner mas de dos caracteres
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <select formControlName="category" name="productCategory" class="form-select">
+              <option [ngValue]="undefined">Categoria</option>
+              <option *ngFor="let productCategory of productCategories" [ngValue]="productCategory">
+                {{productCategory.categoryName}}</option>
+            </select>
+          </div>
+
+
+          <div *ngIf="productCategory.invalid && (productCategory.dirty || productCategory.touched)" class="alert alert-danger mt-1">
+            <div *ngIf="productCategory.errors?.['required'] || productCategory.errors?.['noOnlyWhiteSpace']">
+                 categoria no puede estar vacio
+            </div>
+
+            <div *ngIf="productCategory.errors?.['minlength']">
+                categoria debe terner mas de dos caracteres
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <div class="form-group">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="6"
+                  placeholder="description del producto" formControlName="decription"> </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div *ngIf="productDescription.invalid && (productDescription.dirty || productDescription.touched)" class="alert alert-danger mt-1">
+          <div *ngIf="productDescription.errors?.['required'] || productDescription.errors?.['noOnlyWhiteSpace']">
+              descripcion no puede estar vacio
+          </div>
+
+          <div *ngIf="productDescription.errors?.['minlength']">
+              decripcion debe terner mas de dos caracteres
+          </div>
+        </div>
+
+
+
+        <!-- <div class="mb-3" formGroupName="file">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Foto del producto</label>
+            <input formControlName="imageFile"         
+                   class="form-control"
+                   type="file"
+                   multiple value="select"
+                   #selectFile     
+                   >
+          </div>
+        </div> -->
+
+      </div>
+      <button type="submit" class="btn btn-primary"><span>Agregar</span></button>
+      
+    </form>
+   
+
+    <button type="button" routerLink="/productList" class="btn btn-primary mt-5">Ver Inventario</button>
+  </div>
+  <div class="mb-5"></div>
+  <div class="mb-5"></div>
+
+</div>

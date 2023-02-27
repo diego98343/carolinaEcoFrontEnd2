@@ -1,0 +1,5 @@
+<div>
+    <div *ngIf="auth.user$ | async as user" class="text-gray-800 text-base font-semibold  " >
+     <p>{{user.email}}</p>
+    </div>
+</div>

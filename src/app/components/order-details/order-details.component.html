@@ -1,0 +1,67 @@
+<h3 class=" m-5 flex flex-col">Informacion del cliente</h3>
+
+<div *ngFor="let tempCustomer of  customer" class="m-5 flex flex-col">
+ 
+  <span class="m-1">Nombre: {{tempCustomer.name}}</span>
+  <span class="m-1">Email: {{tempCustomer.email}}</span>
+</div>
+
+
+<h3 class=" m-5 flex flex-col">Orden</h3>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    img
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    reference
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    cantidad
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    talla
+                </th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tempItem of orderItems"  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="overflow-hidden rounded-lg w-16 h-25 bg-gray-50 border border-gray-200">
+                        <img src="{{tempItem.imageUrl}}" alt="">
+                      </div>
+                </th>
+                <td class="px-6 py-4">
+                   {{tempItem.name}}
+                </td> 
+                <td class="px-6 py-4">
+                    {{tempItem.reference}}
+                </td> 
+                <td class="px-6 py-4">
+                    {{tempItem.quantity}}
+                 </td>
+                 <td class="px-6 py-4">
+                    {{tempItem.size}}
+                    0
+                 </td>             
+              
+            </tr>
+    
+
+          
+    </table>
+    
+
+</div>
+
+
+
+
+
