@@ -35,6 +35,7 @@ export class EditProductsComponent implements OnInit {
 
     this.displayProductCategories();
     this.getProductById();
+    // this.setFormBuildValues();
 
     this.allProducts = this._formBuilder.group({
 
@@ -58,6 +59,7 @@ export class EditProductsComponent implements OnInit {
 
         imageUrl: new FormControl('', [Validators.required,
         Validators.minLength(5),
+        Validators.nullValidator, //try if email cant be read 
         EcommerceValidator.noOnlyWhiteSpace]),
 
         category: new FormControl('', [Validators.required]),
@@ -110,18 +112,6 @@ export class EditProductsComponent implements OnInit {
   }
 
 
-   getProductById(){
-
-    this.theproductId = +this.route.snapshot.paramMap.get('id')!
-
-    this._productService.getProductById(this.theproductId).subscribe(
-      data=>{
-       this.product =data;
-       console.log(this.product);
-      } 
-    )
-    
-   }
 
 
   onSubmit() {
@@ -144,6 +134,9 @@ export class EditProductsComponent implements OnInit {
     productTry.productCategory = allProducts.category;
     productTry.description = allProducts.decription;
 
+
+    
+
     
 
     this._productService.editProduct(this.theproductId,productTry).subscribe(
@@ -152,6 +145,31 @@ export class EditProductsComponent implements OnInit {
       }
     );
   }
+
+  getProductById(){
+
+    this.theproductId = +this.route.snapshot.paramMap.get('id')!
+
+    this._productService.getProductById(this.theproductId).subscribe(
+      data=>{
+       this.product =data;
+       console.log(this.product);
+      } 
+    )  
+   }
+
+
+  //  setFormBuildValues(){
+
+  //   let allProducts = this.allProducts.controls['productInputs'].setValue(
+  //     product: new FormControl('', [Validators.required,
+  //       Validators.minLength(5),
+     
+  //   )
+
+  
+  //  }
+
 
 
   
