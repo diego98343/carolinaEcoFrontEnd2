@@ -77,13 +77,16 @@ export class AddProductComponent implements OnInit {
    
 
 
-// file: this._formBuilder.group({
+     // file: this._formBuilder.group({
 
-//  imageFile: new FormControl('',[Validators.required])
+       //  imageFile: new FormControl('',[Validators.required])
 
-//   })   
+       //   })   
 
-})
+  }
+
+ )
+
 }
 
 

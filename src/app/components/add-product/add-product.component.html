@@ -1,4 +1,4 @@
-<div class="mt-5">
+<div class="mt-5 mb-5">
   <div class="container col-md-4">
 
     <form [formGroup]="allProducts" (ngSubmit)="onSubmit()">
@@ -179,14 +179,20 @@
         </div> -->
 
       </div>
-      <button type="submit" class="btn btn-primary"><span>Agregar</span></button>
+      <div class="mt-10">
+        <div class="flex flex-row">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-5"><span>Agregar</span></button>
+          <button type="button" routerLink="/productList" class="bg-green-400 hover:bg-gray-500 700 text-white font-bold py-2 px-4 rounded">Ver Inventario</button>
+        </div>
+  
+      </div>
+   
       
     </form>
    
 
-    <button type="button" routerLink="/productList" class="btn btn-primary mt-5">Ver Inventario</button>
+  
   </div>
-  <div class="mb-5"></div>
-  <div class="mb-5"></div>
+
 
 </div>

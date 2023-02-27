@@ -17,6 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+
 
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -37,12 +40,14 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderHistoryDetailsComponent } from './components/order-history-details/order-history-details.component';
+import { EditProductsComponent } from './components/edit-products/edit-products.component';
 
 
 
 
 const routers: Routes=[
 
+  {path:'editProduct/:id',component: EditProductsComponent},
   {path:'login',component: UserLogInComponent},
   {path:'orderHistory',component: OrderHistoryComponent},
   {path:'order/:id',component: OrderDetailsComponent},
@@ -52,7 +57,6 @@ const routers: Routes=[
   {path:'addProduct',component: AddProductComponent},
 
   {path:'productList',component: ListOfProductsComponent},
-  {path:'editProduct/:id',component: UpdateProductComponent},
   {path:'productCategories',component: ProductsComponent},
   {path:'cart',component: ShoppingCartComponent},
   {path:'products/:id',component: ProductDetailsComponent},
@@ -89,6 +93,8 @@ const routers: Routes=[
     OrderDetailsComponent,
     OrderHistoryComponent,
     OrderHistoryDetailsComponent,
+    EditProductsComponent,
+    
     
     
     
@@ -110,7 +116,10 @@ const routers: Routes=[
     ReactiveFormsModule,
     MatPaginatorModule,
     NgbModule,
-    
+    MatFormFieldModule ,
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
    
    
     AuthModule.forRoot({
@@ -123,10 +132,12 @@ const routers: Routes=[
 ,
    
   ],
-  providers: [
-  
-  ],
+  providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddProductComponent]
+  entryComponents:[
+    AddProductComponent,
+    
+
+  ]
 })
 export class AppModule { }

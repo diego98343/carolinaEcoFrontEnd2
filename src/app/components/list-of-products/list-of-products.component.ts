@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductCategory } from 'src/app/models/productCategoryClass/product-category';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/productClass/product';
-import { ProductCategoryService } from 'src/app/services/productCategoryService/product-category.service';
 import { ProductService } from 'src/app/services/productService/product.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AddProductComponent } from '../add-product/add-product.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Order } from 'src/app/common/order';
 import { OrderService } from 'src/app/services/orderService/order.service';
 import { OrderClass } from 'src/app/models/orderClass/order-class';
 import { CustomerClass } from 'src/app/models/customerClass/customer-class';
+import { EditProductsComponent } from '../edit-products/edit-products.component';
 
 @Component({
   selector: 'app-list-of-products',
@@ -32,15 +28,19 @@ export class ListOfProductsComponent implements OnInit {
 
 
   constructor(private _productService:ProductService,
-              private _productCategoryService: ProductCategoryService,
-              private _orderService:OrderService
+              private _orderService:OrderService,
+              private dialogRef:MatDialog,
+              private zone: NgZone
              ) { }
 
   ngOnInit(): void {
     this.displayProducts();
     this.loadListProducts()
+    
+  }
 
-   
+  openDialog(){
+   const dialogRef = this.dialogRef.open(EditProductsComponent)
   }
 
 
@@ -80,10 +80,7 @@ export class ListOfProductsComponent implements OnInit {
           }         
         )
       }
-      
-
-
-
-   
 
 }
+
+
